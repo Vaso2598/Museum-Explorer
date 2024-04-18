@@ -31,3 +31,27 @@ body {
     text-wrap: balance;
   }
 } */
+
+.bg-primary{
+  background-color: #475F45;
+}
+
+.bg-darkGreen{
+  background-color: #343D33;
+}
+
+.bg-swamp{
+  background-color: #414840;
+}
+
+.text-primary{
+  color: #475F45;
+}
+
+.text-darkGreen{
+  color: #343D33;
+}
+
+.text-swamp{
+  color: #414840;
+}
