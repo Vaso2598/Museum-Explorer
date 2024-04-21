@@ -1,11 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Btn_primary from "@/components/buttons/Btn_primary";
+import Btn_secondary from "@/components/buttons/Btn_secondary";
+import Btn_invert from "@/components/buttons/Btn_invert";
 
 const page = () => {
 	return (
 		<>
-			<section className="flex flex-row justify-between items-center px-28">
+			<section className="flex flex-row justify-between items-center px-28 pt-4 bg-neutral-50 text-swamp-900">
 				<div className="w-2/5 flex flex-col gap-4">
 					<h1 className="text-5xl text-darkGreen">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
 					<p className=" text-swamp">
@@ -13,13 +16,9 @@ const page = () => {
 						culpa nihil itaque ipsum explicabo amet eos at obcaecati, quaerat ipsa nisi expedita excepturi. Aliquid,
 						assumenda!
 					</p>
-					<div>
-						<button className="box-content border-2 border-current bg-primary font-semibold text-white py-2 px-6">
-							Buy Tickets
-						</button>
-						<button className="box-content border-2 border-current bg-white font-semibold text-primary py-2 px-6">
-							Learn More
-						</button>
+					<div className="flex gap-6">
+						<Btn_primary>Buy Tickets</Btn_primary>
+						<Btn_secondary>Learn More</Btn_secondary>
 					</div>
 				</div>
 				<Image
@@ -30,22 +29,22 @@ const page = () => {
 					alt="image"
 				/>
 			</section>
-			<section className="px-48">
-				<div className="flex">
+			<section className="px-48 py-24 flex flex-col gap-16 bg-swamp-700 text-neutral-50">
+				<div className="flex gap-28">
 					<Image className="" src="/placeholder/hqdefault.jpg" width={534} height={354} alt="image" />
-					<div>
+					<div className="flex flex-col gap-4">
 						<h2 className="text-4xl">Discover Yourself With Nature</h2>
-						<p className="">
+						<p>
 							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia corporis repellat fuga nostrum perspiciatis
 							aspernatur suscipit mollitia deserunt hic impedit autem quam consequuntur cumque, ducimus obcaecati,
 							magnam molestiae sequi recusandae!
 						</p>
-						<button className="">Learn More</button>
+						<Btn_invert>Learn More</Btn_invert>
 					</div>
 				</div>
-				<Image className="" src="/placeholder/hqdefault.jpg" width={1040} height={409} alt="image" />
+				{/* <Image className="" src="/placeholder/hqdefault.jpg" width={1040} height={409} alt="image" /> */}
 			</section>
-			<section className="px-24">
+			<section className="px-24 bg-neutral-50">
 				<h2 className="text-lg">News & Updates</h2>
 				<Link href="/">View All Posts</Link>
 				<div className="flex">
