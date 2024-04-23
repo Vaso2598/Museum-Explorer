@@ -7,7 +7,7 @@ import Btn_invert from "@/components/buttons/Btn_invert";
 
 const page = () => {
 	return (
-		<>
+		<main>
 			<section className="flex flex-row justify-between items-center px-28 pt-4 bg-neutral-50 text-swamp-900">
 				<div className="w-2/5 flex flex-col gap-4">
 					<h1 className="text-5xl text-darkGreen">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
@@ -42,9 +42,8 @@ const page = () => {
 						<Btn_invert>Learn More</Btn_invert>
 					</div>
 				</div>
-				{/* <Image className="" src="/placeholder/hqdefault.jpg" width={1040} height={409} alt="image" /> */}
 			</section>
-			<section className="px-24 bg-neutral-50">
+			<section className="px-24 pb-4 bg-neutral-50">
 				<h2 className="text-lg">News & Updates</h2>
 				<Link href="/">View All Posts</Link>
 				<div className="flex">
@@ -94,7 +93,7 @@ const page = () => {
 					</div>
 				</div>
 			</section>
-		</>
+		</main>
 	);
 };
 
