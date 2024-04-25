@@ -33,7 +33,7 @@ const page = () => {
 				<div className="flex gap-28">
 					<Image className="" src="/placeholder/hqdefault.jpg" width={534} height={354} alt="image" />
 					<div className="flex flex-col gap-4">
-						<h2 className="text-4xl">Discover Yourself With Nature</h2>
+						<h2 className="text-4xl">Discover Old and New Art</h2>
 						<p>
 							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia corporis repellat fuga nostrum perspiciatis
 							aspernatur suscipit mollitia deserunt hic impedit autem quam consequuntur cumque, ducimus obcaecati,

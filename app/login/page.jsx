@@ -1,17 +1,15 @@
 "use client";
 import React, {useState} from "react";
 import Link from "next/link";
-import {auth, db} from "@/lib/firebase";
-import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
-import {doc, setDoc} from "firebase/firestore";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "@/lib/firebase";
 
-const signup = () => {
+const login = () => {
 	const [email, setEmail] = useState("");
-	const [displayName, setDisplayName] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 
-	const handleSignUp = async ($e) => {
+	const handleLogin = async ($e) => {
 		$e.preventDefault();
 
 		setError(null);
@@ -21,33 +19,17 @@ const signup = () => {
 			return;
 		}
 
-		if (!displayName) {
-			setError("Please enter your User Name.");
-			return;
+		if (!password) {
+			setError("Please enter your Password.");
 		}
 
-		if (!password || password.length < 6) {
-			setError("Password must be at least 6 characters long.");
-		}
-
-		createUserWithEmailAndPassword(auth, email, password)
+		// const auth = getAuth();
+		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
-				const id = user.uid;
-				updateProfile(auth.currentUser, {displayName: displayName});
-				setDoc(doc(db, "users", id), {
-					email: email,
-					displayName: displayName,
-					password: password,
-					id,
-				});
-				// console.log(user);
+				// console.log(userCredential.user);
 			})
 			.catch((error) => {
-				if (error === "Firebase: Error (auth/email-already-in-use).") {
-					setError("Email already in use. Please use another Email.");
-				}
-				setError(error.message || "An error occurred during signup");
 				console.error(error);
 			});
 	};
@@ -57,11 +39,12 @@ const signup = () => {
 			<div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
 					<h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-neutral-900">
-						Welcome, Please Sign Up
+						Welcome, Please Log In
+						<br /> to access website
 					</h1>
 				</div>
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form className="space-y-6" action="#" method="POST" onSubmit={handleSignUp}>
+					<form className="space-y-6" action="#" method="POST" onSubmit={handleLogin}>
 						<div>
 							<label htmlFor="email" className="block font-medium leading-6 text-neutral-900">
 								Email address
@@ -74,24 +57,6 @@ const signup = () => {
 									autoComplete="email"
 									// required
 									onChange={($e) => setEmail($e.target.value)}
-									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
-								/>
-							</div>
-						</div>
-						<div>
-							<div className="flex items-center justify-between">
-								<label htmlFor="displayName" className="block font-medium leading-6 text-neutral-900">
-									User Name
-								</label>
-							</div>
-							<div className="mt-2">
-								<input
-									id="displayName"
-									name="displayName"
-									type="text"
-									autoComplete="displayName"
-									// required
-									onChange={($e) => setDisplayName($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 								/>
 							</div>
@@ -114,16 +79,16 @@ const signup = () => {
 							</div>
 						</div>
 						<p className="font-medium text-neutral-900">
-							Already have an account?{" "}
-							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/login">
-								Login
+							Don't have an account?{" "}
+							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/signup">
+								Sign Up
 							</Link>
 						</p>
 						<div>
 							<button
 								type="submit"
 								className="flex w-full justify-center rounded-md bg-swamp-700 px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-swamp-600">
-								Sign up
+								Log In
 							</button>
 						</div>
 						<div>
@@ -140,4 +105,4 @@ const signup = () => {
 	);
 };
 
-export default signup;
+export default login;

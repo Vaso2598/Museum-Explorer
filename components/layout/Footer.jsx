@@ -6,8 +6,7 @@ import {usePathname} from "next/navigation";
 
 const Footer = () => {
 	const pathname = usePathname();
-	console.log(pathname);
-	if (pathname !== "/signup") {
+	if (pathname !== "/signup" && pathname !== "/login") {
 		return (
 			<footer>
 				<section className="flex justify-between px-28 py-10 bg-swamp-800 text-neutral-50 items-start">

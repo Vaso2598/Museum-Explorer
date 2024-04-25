@@ -1,14 +1,23 @@
 "use client";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Btn_dark from "../buttons/Btn_dark";
 import {usePathname} from "next/navigation";
+import {auth} from "@/lib/firebase";
 
 const Header = () => {
+	const [user, setUser] = useState("");
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			setUser(user);
+		});
+		return () => unsubscribe();
+	}, []);
+
 	const pathname = usePathname();
-	console.log(pathname);
-	if (pathname !== "/signup") {
+	if (pathname !== "/signup" && pathname !== "/login") {
 		return (
 			<header>
 				<nav className="py-4 px-28 flex justify-between items-center bg-neutral-50">
@@ -26,7 +35,7 @@ const Header = () => {
 						<li className="hover:text-swamp-600">Programs & Events</li>
 						<li className="hover:text-swamp-600">Store</li>
 						<li>
-							<Btn_dark>User</Btn_dark>
+							<Btn_dark>{user.displayName}</Btn_dark>
 						</li>
 					</menu>
 				</nav>
