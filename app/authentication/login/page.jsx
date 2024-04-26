@@ -7,6 +7,7 @@ import {redirect} from "next/navigation";
 import checkToken from "@/lib/checkToken";
 
 const login = () => {
+	checkToken();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
@@ -35,16 +36,6 @@ const login = () => {
 				console.error(error);
 			});
 	};
-
-	/* token check test remove later */
-	// if (sessionStorage.key !== null) {
-	// 	console.log("token does not exist");
-	// } else {
-	// 	console.log("token exists");
-	// 	redirect("/home");
-	// }
-
-	checkToken();
 
 	return (
 		<section className="bg-neutral-50 h-screen">
