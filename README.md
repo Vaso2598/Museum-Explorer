@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Museum Explorer - Final Project
 
-## Getting Started
+A Next.js React application for exploring the Art Institute of Chicago's collection.
 
-First, run the development server:
+This README provides an overview of the Museum Explorer project, its functionalities, and how to get started.
 
-```bash
+## Project Description
+
+This interactive application allows you to delve into the vast collection of the Art Institute of Chicago. Leverage the power of the museum's Open Access API ([text](https://api.artic.edu/docs/)) to:
+
+### Search for artworks by title, artist, or keywords.
+
+View detailed information about individual artworks, including images, descriptions, and artist details.
+Explore various artwork categories (functionality depends on API data).
+Technologies
+Frontend:
+Next.js: React framework for server-side rendering and static site generation.
+React: JavaScript library for building user interfaces.
+Backend:
+Art Institute of Chicago Open Access API ([text](https://api.artic.edu/docs/)): Provides access to museum collection data in JSON format.
+Installation
+Clone this repository.
+Install dependencies:
+Bash
+npm install
+Use code with caution.
+content_copy
+Running the Application
+Start the development server:
+Bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Use code with caution.
+content_copy
+This will launch the application at http://localhost:3000 by default.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Integration
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The project utilizes the Art Institute of Chicago's Open Access API ([text](https://api.artic.edu/docs/)) to retrieve artwork data. No API key is required for basic functionality.
