@@ -41,7 +41,7 @@ const signup = () => {
 					password: password,
 					id,
 				});
-				// console.log(user);
+				window.location.href = "/login";
 			})
 			.catch((error) => {
 				if (error === "Firebase: Error (auth/email-already-in-use).") {
@@ -72,7 +72,6 @@ const signup = () => {
 									name="email"
 									type="email"
 									autoComplete="email"
-									// required
 									onChange={($e) => setEmail($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 								/>
@@ -90,7 +89,6 @@ const signup = () => {
 									name="displayName"
 									type="text"
 									autoComplete="displayName"
-									// required
 									onChange={($e) => setDisplayName($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 								/>
@@ -107,7 +105,6 @@ const signup = () => {
 									id="password"
 									name="password"
 									type="password"
-									// required
 									onChange={($e) => setPassword($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 								/>
@@ -115,7 +112,7 @@ const signup = () => {
 						</div>
 						<p className="font-medium text-neutral-900">
 							Already have an account?{" "}
-							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/login">
+							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/authentication/login">
 								Login
 							</Link>
 						</p>

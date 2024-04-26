@@ -23,11 +23,11 @@ const login = () => {
 			setError("Please enter your Password.");
 		}
 
-		// const auth = getAuth();
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
-				// console.log(userCredential.user);
+				sessionStorage.setItem("token", userCredential.user.accessToken);
+				window.location.href = "/home";
 			})
 			.catch((error) => {
 				console.error(error);
@@ -55,7 +55,6 @@ const login = () => {
 									name="email"
 									type="email"
 									autoComplete="email"
-									// required
 									onChange={($e) => setEmail($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 								/>
@@ -72,7 +71,6 @@ const login = () => {
 									id="password"
 									name="password"
 									type="password"
-									// required
 									onChange={($e) => setPassword($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 								/>
@@ -80,7 +78,7 @@ const login = () => {
 						</div>
 						<p className="font-medium text-neutral-900">
 							Don't have an account?{" "}
-							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/signup">
+							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/authentication/signup">
 								Sign Up
 							</Link>
 						</p>

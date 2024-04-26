@@ -1,5 +1,4 @@
 "use client";
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 import {useEffect, useState} from "react";
 import Image from "next/image";
 import Btn_load from "@/components/buttons/Btn_load";
@@ -7,8 +6,8 @@ import {useRouter} from "next/navigation";
 import Link from "next/link";
 
 export default function Collection() {
-	const [data, setData] = useState(null);
-	const [page, setPage] = useState(130);
+	const [data, setData] = useState([]);
+	const [page, setPage] = useState(1);
 	const [isLoading, setLoading] = useState(true);
 	const [inputValue, setInputValue] = useState("");
 	const [searchValue, setSearchValue] = useState("");
@@ -23,8 +22,8 @@ export default function Collection() {
 
 	useEffect(() => {
 		const url = searchValue
-			? `${API_URL}/artworks/search?q=${searchValue}page=${page}&limit=10`
-			: `${API_URL}/artworks?page=${page}&limit=10`;
+			? `https://api.artic.edu/api/v1/artworks/search?q=${searchValue}page=${page}&limit=10`
+			: `https://api.artic.edu/api/v1/artworks?page=${page}&limit=8`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {
@@ -36,8 +35,6 @@ export default function Collection() {
 	if (isLoading) return <p>Loading...</p>;
 
 	if (!data) return <p>No data</p>;
-
-	// const id = data.id;
 
 	return (
 		<section className="bg-neutral-50 pt-4 px-28 flex flex-col items-center">
@@ -55,9 +52,10 @@ export default function Collection() {
 				{data.map((artwork) => (
 					<div
 						key={artwork.id}
-						className="border-2 text-pretty p-4 box-content"
+						className="border-2 text-pretty p-4 box-content flex flex-col justify-between"
 						style={{
 							width: "15vw",
+							minHeight: "300px",
 							maxHeight: "500px",
 						}}>
 						<Link href={`/collection/${artwork.id}`}>
@@ -79,11 +77,14 @@ export default function Collection() {
 							<p className="font-semibold">{artwork.title}</p>
 							<p className="italic">{artwork.artist_display}</p>
 						</Link>
+						<button className="flex justify-center items-center gap-2 py-2 px-1 bg-swamp-600 hover:bg-swamp-700 rounded-2xl text-neutral-50 font-semibold">
+							Add to Favorites
+						</button>
 					</div>
 				))}
 			</section>
 			<section className="py-4">
-				{/* <Btn_load loadMore={() => setPage(page + 1)}>{isLoading ? "Loading..." : "Load More"}</Btn_load> */}
+				<Btn_load loadMore={() => setPage(page + 1)}>{isLoading ? "Loading..." : "Load More"}</Btn_load>
 			</section>
 		</section>
 	);

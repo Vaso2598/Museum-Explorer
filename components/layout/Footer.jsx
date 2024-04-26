@@ -6,7 +6,7 @@ import {usePathname} from "next/navigation";
 
 const Footer = () => {
 	const pathname = usePathname();
-	if (pathname !== "/signup" && pathname !== "/login") {
+	if (pathname !== "/authentication/signup" && pathname !== "/authentication/login") {
 		return (
 			<footer>
 				<section className="flex justify-between px-28 py-10 bg-swamp-800 text-neutral-50 items-start">
@@ -29,12 +29,12 @@ const Footer = () => {
 							<li className="hover:text-neutral-300">
 								<Link href="/home">Home</Link>
 							</li>
-							<li className="hover:text-neutral-300">Exhibitions</li>
 							<li className="hover:text-neutral-300">
 								<Link href="/collection"> Collection</Link>
 							</li>
-							<li className="hover:text-neutral-300">Programs & Events</li>
-							<li className="hover:text-neutral-300">Store</li>
+							<li className="hover:text-neutral-300">
+								<Link href="/favorites"> Favorites</Link>
+							</li>
 						</menu>
 					</div>
 					<div className="w-1/5">

@@ -2,17 +2,16 @@
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function artwork() {
 	const params = useParams();
 	const id = params.id;
 
-	const [data, setData] = useState(null);
+	const [data, setData] = useState({});
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		fetch(`${API_URL}/artworks/${id}`)
+		fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setData(data.data);

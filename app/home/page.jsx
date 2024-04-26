@@ -7,11 +7,11 @@ import Btn_invert from "@/components/buttons/Btn_invert";
 
 const page = () => {
 	return (
-		<main>
+		<>
 			<section className="flex flex-row justify-between items-center px-28 pt-4 bg-neutral-50 text-swamp-900">
 				<div className="w-2/5 flex flex-col gap-4">
 					<h1 className="text-5xl text-darkGreen">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-					<p className=" text-swamp">
+					<p className="text-swamp">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam autem tenetur consectetur delectus facere
 						culpa nihil itaque ipsum explicabo amet eos at obcaecati, quaerat ipsa nisi expedita excepturi. Aliquid,
 						assumenda!
@@ -93,7 +93,7 @@ const page = () => {
 					</div>
 				</div>
 			</section>
-		</main>
+		</>
 	);
 };
 
