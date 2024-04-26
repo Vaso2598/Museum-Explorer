@@ -3,21 +3,44 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import checkToken from "@/lib/checkToken";
+import {doc, updateDoc, arrayUnion} from "firebase/firestore";
+import {db, auth} from "@/lib/firebase";
 
 export default function Artwork() {
 	checkToken();
 	const params = useParams();
-	const id = params.id;
+	const artId = params.id;
 
 	const [data, setData] = useState({});
 	const [loading, setLoading] = useState(true);
 
-	const favoritesAdd = () => {
-		console.log(id);
+	const user = auth.currentUser;
+	const userId = user?.uid;
+
+	// const favoritesAdd = () => {
+	// 	addDoc(collection(db, "favorites", userId, artId), {artwork_id: artId});
+	// 	alert("added to favorites");
+	// };
+
+	/* const favoritesAdd = async () => {
+		const favoritesRef = doc(db, "favorites", userId);
+		addDoc(favoritesRef, {artworkId: [artId]}, {merge: true});
+		let newArrayItem = favoritesRef.push()
+		newArrayItem.set(artId);
+		setArtworkId(artId);
+		// updateDoc(favoritesRef, {artworkId: [artworkId]});
+	}; */
+
+	const favoritesAdd = async () => {
+		const favoritesRef = doc(db, "favorites", userId);
+		await updateDoc(favoritesRef, {
+			artworkId: arrayUnion(artId),
+		});
+		// setArtworkId(artId);
 	};
 
 	useEffect(() => {
-		fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
+		fetch(`https://api.artic.edu/api/v1/artworks/${artId}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setData(data.data);
@@ -31,7 +54,7 @@ export default function Artwork() {
 
 	return (
 		<section className="h-dvh bg-neutral-50 pt-4 px-28">
-			<div key={id} className="border-2 text-pretty p-4 box-content flex flex-col gap-4">
+			<div key={artId} className="border-2 text-pretty p-4 box-content flex flex-col gap-4">
 				<div
 					style={{
 						width: "15vw",
@@ -40,7 +63,7 @@ export default function Artwork() {
 					}}
 					className="relative">
 					<Image
-						src={`https://www.artic.edu/iiif/2/${id}/full/843,/0/default.jpg`}
+						src={`https://www.artic.edu/iiif/2/${artId}/full/843,/0/default.jpg`}
 						fill
 						alt={data?.thumbnail ? data?.thumbnail.alt_text : "artwork"}
 						sizes="20vw"
