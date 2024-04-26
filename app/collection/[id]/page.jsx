@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import checkToken from "@/lib/checkToken";
 
-export default function artwork() {
+export default function Artwork() {
 	checkToken();
 	const params = useParams();
 	const id = params.id;

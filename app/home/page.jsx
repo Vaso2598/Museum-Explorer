@@ -6,9 +6,13 @@ import Btn_primary from "@/components/buttons/Btn_primary";
 import Btn_secondary from "@/components/buttons/Btn_secondary";
 import Btn_invert from "@/components/buttons/Btn_invert";
 import checkToken from "@/lib/checkToken";
+import {usePathname} from "next/navigation";
 
 const page = () => {
 	checkToken();
+
+	const url = usePathname();
+	console.log(url);
 
 	return (
 		<>

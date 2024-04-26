@@ -6,7 +6,7 @@ import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {doc, setDoc} from "firebase/firestore";
 import checkToken from "@/lib/checkToken";
 
-const signup = () => {
+const Signup = () => {
 	checkToken();
 	const [email, setEmail] = useState("");
 	const [displayName, setDisplayName] = useState("");
@@ -139,4 +139,4 @@ const signup = () => {
 	);
 };
 
-export default signup;
+export default Signup;

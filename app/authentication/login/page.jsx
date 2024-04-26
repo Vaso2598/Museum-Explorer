@@ -5,7 +5,7 @@ import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "@/lib/firebase";
 import checkToken from "@/lib/checkToken";
 
-const login = () => {
+const Login = () => {
 	checkToken();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -79,7 +79,7 @@ const login = () => {
 							</div>
 						</div>
 						<p className="font-medium text-neutral-900">
-							Don't have an account?{" "}
+							Don&apos;t have an account?{" "}
 							<Link className="font-bold text-swamp-700 hover:text-swamp-600" href="/authentication/signup">
 								Sign Up
 							</Link>
@@ -105,4 +105,4 @@ const login = () => {
 	);
 };
 
-export default login;
+export default Login;
