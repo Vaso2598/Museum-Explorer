@@ -8,7 +8,7 @@ import Btn_invert from "@/components/buttons/Btn_invert";
 import checkToken from "@/lib/checkToken";
 import {usePathname} from "next/navigation";
 
-const page = () => {
+const Home = () => {
 	checkToken();
 
 	const url = usePathname();
@@ -107,4 +107,4 @@ const page = () => {
 	);
 };
 
-export default page;
+export default Home;
