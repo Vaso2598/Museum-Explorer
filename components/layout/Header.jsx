@@ -26,13 +26,6 @@ const Header = () => {
 		return () => unsubscribe();
 	}, []);
 
-	/* token check test remove later */
-	if (sessionStorage.getItem("token") === null) {
-		console.log("nothing");
-	} else {
-		console.log("something");
-	}
-
 	const pathname = usePathname();
 	if (pathname !== "/authentication/signup" && pathname !== "/authentication/login") {
 		return (
@@ -42,7 +35,6 @@ const Header = () => {
 						<Image className="w-32 h-16 -ml-6" src="/logo.svg" width={150} height={150} alt="Final Exam Project Logo" />
 					</Link>
 					<menu className="text-swamp-900 font-semibold flex items-center gap-4">
-						<li className="select-none">Hello, {user?.displayName}</li>
 						<li className="hover:text-swamp-600">
 							<Link href="/home">Home</Link>
 						</li>
@@ -52,6 +44,7 @@ const Header = () => {
 						<li className="hover:text-swamp-600">
 							<Link href="/favorites"> Favorites</Link>
 						</li>
+						<li className="select-none text-lime-700">Hello, {user?.displayName}</li>
 						<li>
 							<p
 								onClick={handleLogout}

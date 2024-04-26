@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Btn_primary from "@/components/buttons/Btn_primary";
 import Btn_secondary from "@/components/buttons/Btn_secondary";
 import Btn_invert from "@/components/buttons/Btn_invert";
+import checkToken from "@/lib/checkToken";
 
 const page = () => {
+	checkToken();
+
 	return (
 		<>
 			<section className="flex flex-row justify-between items-center px-28 pt-4 bg-neutral-50 text-swamp-900">
@@ -39,7 +43,9 @@ const page = () => {
 							aspernatur suscipit mollitia deserunt hic impedit autem quam consequuntur cumque, ducimus obcaecati,
 							magnam molestiae sequi recusandae!
 						</p>
-						<Btn_invert>Learn More</Btn_invert>
+						<Btn_invert>
+							<Link href="/collection">Learn More</Link>
+						</Btn_invert>
 					</div>
 				</div>
 			</section>

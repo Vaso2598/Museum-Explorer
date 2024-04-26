@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import Link from "next/link";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "@/lib/firebase";
+import {redirect} from "next/navigation";
+import checkToken from "@/lib/checkToken";
 
 const login = () => {
 	const [email, setEmail] = useState("");
@@ -33,6 +35,16 @@ const login = () => {
 				console.error(error);
 			});
 	};
+
+	/* token check test remove later */
+	// if (sessionStorage.key !== null) {
+	// 	console.log("token does not exist");
+	// } else {
+	// 	console.log("token exists");
+	// 	redirect("/home");
+	// }
+
+	checkToken();
 
 	return (
 		<section className="bg-neutral-50 h-screen">

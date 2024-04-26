@@ -4,8 +4,10 @@ import Image from "next/image";
 import Btn_load from "@/components/buttons/Btn_load";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
+import checkToken from "@/lib/checkToken";
 
 export default function Collection() {
+	checkToken();
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
 	const [isLoading, setLoading] = useState(true);
@@ -16,14 +18,24 @@ export default function Collection() {
 
 	const handleSearch = async ($e) => {
 		$e.preventDefault();
-		router.push(`/collection?inputValue=${inputValue}`);
 		setSearchValue(inputValue);
+		router.push(`/collection?inputValue=${inputValue}`);
+		localStorage.setItem("searchValueInLocalStorage", inputValue);
 	};
+
+	const clearValue = ($e) => {
+		$e.preventDefault();
+		setInputValue("");
+	};
+
+	if (inputValue === "") {
+		router.push(`collection?page=${page}`);
+	}
 
 	useEffect(() => {
 		const url = searchValue
 			? `https://api.artic.edu/api/v1/artworks/search?q=${searchValue}page=${page}&limit=10`
-			: `https://api.artic.edu/api/v1/artworks?page=${page}&limit=8`;
+			: `https://api.artic.edu/api/v1/artworks?page=${page}&limit=10`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {
@@ -39,16 +51,34 @@ export default function Collection() {
 	return (
 		<section className="bg-neutral-50 pt-4 px-28 flex flex-col items-center">
 			<section className="w-full flex justify-center">
-				<form action="#" onSubmit={handleSearch} className="w-4/5">
+				<form action="#" onSubmit={handleSearch} className="w-4/5 relative flex items-center">
 					<input
 						type="search"
 						onChange={($e) => setInputValue($e.target.value)}
 						placeholder="Search by keyword, artist, or reference"
-						className="block w-full h-16 px-6 rounded-full border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
+						className=" block w-full h-16 px-6 rounded-full border-0 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400"
 					/>
+					<button
+						onClick={handleSearch}
+						className={
+							inputValue.length > 0
+								? "absolute right-3 rotate-90 flex justify-center rounded-full bg-swamp-700 hover:bg-swamp-600 active:bg-swamp-700 size-12 text-neutral-50 text-4xl"
+								: "hidden"
+						}>
+						△
+					</button>
+					<button
+						onClick={clearValue}
+						className={
+							inputValue.length > 0
+								? "absolute right-16 rotate-45 flex justify-center rounded-full bg-swamp-700 hover:bg-swamp-600 active:bg-swamp-700 size-12 text-neutral-50 text-4xl"
+								: "hidden"
+						}>
+						+
+					</button>
 				</form>
 			</section>
-			<section className="flex flex-wrap justify-center gap-4 pt-6">
+			<section className="flex flex-wrap justify-center gap-4 py-9">
 				{data.map((artwork) => (
 					<div
 						key={artwork.id}
@@ -77,14 +107,15 @@ export default function Collection() {
 							<p className="font-semibold">{artwork.title}</p>
 							<p className="italic">{artwork.artist_display}</p>
 						</Link>
-						<button className="flex justify-center items-center gap-2 py-2 px-1 bg-swamp-600 hover:bg-swamp-700 rounded-2xl text-neutral-50 font-semibold">
-							Add to Favorites
-						</button>
 					</div>
 				))}
 			</section>
-			<section className="py-4">
-				<Btn_load loadMore={() => setPage(page + 1)}>{isLoading ? "Loading..." : "Load More"}</Btn_load>
+			<section className={inputValue.length > 0 ? "hidden" : "pb-8 flex gap-8 justify-between items-center"}>
+				<Btn_load disabled={page === 1} loadMore={() => setPage(page - 1)}>
+					{isLoading ? "Loading..." : "Previous Page"}
+				</Btn_load>
+				<p className="text-swamp-700 font-semibold">Page #{page}</p>
+				<Btn_load loadMore={() => setPage(page + 1)}>{isLoading ? "Loading..." : "Next Page"}</Btn_load>
 			</section>
 		</section>
 	);

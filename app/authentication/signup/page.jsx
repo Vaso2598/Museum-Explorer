@@ -4,6 +4,8 @@ import Link from "next/link";
 import {auth, db} from "@/lib/firebase";
 import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {doc, setDoc} from "firebase/firestore";
+import {redirect} from "next/navigation";
+import checkToken from "@/lib/checkToken";
 
 const signup = () => {
 	const [email, setEmail] = useState("");
@@ -51,6 +53,16 @@ const signup = () => {
 				console.error(error);
 			});
 	};
+
+	/* token check test remove later */
+	// if (sessionStorage.getItem("token") === null) {
+	// 	console.log("token does not exist");
+	// } else {
+	// 	console.log("token exists");
+	// 	redirect("/home");
+	// }
+
+	checkToken();
 
 	return (
 		<section className="bg-neutral-50 h-screen">
