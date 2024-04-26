@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import Link from "next/link";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "@/lib/firebase";
-import {redirect} from "next/navigation";
 import checkToken from "@/lib/checkToken";
 
 const login = () => {
