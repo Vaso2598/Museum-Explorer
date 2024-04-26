@@ -43,7 +43,7 @@ const Signup = () => {
 					password: password,
 					id,
 				});
-				window.location.href = "/login";
+				window.location.href = "/authentication/login";
 			})
 			.catch((error) => {
 				if (error === "Firebase: Error (auth/email-already-in-use).") {
